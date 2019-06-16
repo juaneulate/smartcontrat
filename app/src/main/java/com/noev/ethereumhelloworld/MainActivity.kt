@@ -15,8 +15,8 @@ import java.math.BigInteger
 import java.util.concurrent.TimeUnit
 
 const val MINIMUM_GAS_LIMIT = 21000
-const val PRIVATE_KEY_ROPSTEN = "YOUR_ROPSTEN_PRIVATE_KEY" //todo: You have to create an ethereum account on the Ropsten network and put your private key here
-const val ROPSTEN_INFURA_URL = "https://ropsten.infura.io/YOUR_API_KEY" //todo: You have to register on the Infura website and put your api key here
+const val PRIVATE_KEY_ROPSTEN = "eddd8ff8105b434887895e9dd5b7f021" //todo: You have to create an ethereum account on the Ropsten network and put your private key here
+const val ROPSTEN_INFURA_URL = "https://ropsten.infura.io/v3/eddd8ff8105b434887895e9dd5b7f021" //todo: You have to register on the Infura website and put your api key here
 const val CONTRACT_ADDRESS = "0x024b64940518779068e57352F3bDDdE08E4D9c40"
 
 class MainActivity : AppCompatActivity() {
