@@ -22,6 +22,9 @@ public class UtilRest implements Serializable {
     public Response testingGetService() {
         try {
             //log.info("testingGetService");
+
+
+
             return Response.ok("testing Get Service OK").build();
         } catch (Exception e) {
             //log.error(e);

@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class BaseDaoImpl implements Serializable {
 
-    /*@PersistenceContext*/
+    @PersistenceContext
     protected EntityManager em;
 
     public <T> T save(T entity) {

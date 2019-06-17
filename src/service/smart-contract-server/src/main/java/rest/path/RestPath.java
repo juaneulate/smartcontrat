@@ -13,6 +13,7 @@ public final class RestPath {
     public static final String REST_UTIL = "util";
     public static final String REST_CONTRACT = "contract";
     public static final String REST_INFURA = "infura";
+    public static final String REST_USER = "user";
 
     //endregion
 

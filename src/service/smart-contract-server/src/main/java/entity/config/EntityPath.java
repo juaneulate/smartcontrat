@@ -20,4 +20,11 @@ public class EntityPath {
     public static final String CONTRACT_DETAIL_SEQUENCE = CONTRACT_DETAIL + SEPARATOR + SEQUENCE;
 
 
+    public static final String USER = "users";
+    public static final String USER_GENERATOR = GENERATOR + SEPARATOR + USER;
+    public static final String USER_SEQUENCE = USER + SEPARATOR + SEQUENCE;
+
+
+
+
 }
