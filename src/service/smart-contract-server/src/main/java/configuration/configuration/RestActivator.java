@@ -1,6 +1,6 @@
 package configuration.configuration;
 
-import rest.path.RestPath;
+import rest.configuration.path.RestPath;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

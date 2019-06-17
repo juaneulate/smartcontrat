@@ -3,7 +3,7 @@ package rest;
 
 import entity.ContractEntity;
 import lombok.extern.jbosslog.JBossLog;
-import rest.path.RestPath;
+import rest.configuration.path.RestPath;
 import service.ContractService;
 
 import javax.inject.Inject;

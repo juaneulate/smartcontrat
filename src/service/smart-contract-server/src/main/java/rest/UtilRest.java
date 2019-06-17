@@ -3,7 +3,7 @@ package rest;
 import dto.DetailTestDto;
 import dto.TestDto;
 import lombok.extern.jbosslog.JBossLog;
-import rest.path.RestPath;
+import rest.configuration.path.RestPath;
 import utils.JsonUtil;
 
 import javax.ws.rs.*;

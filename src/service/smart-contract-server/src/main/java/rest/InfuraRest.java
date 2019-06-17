@@ -2,7 +2,7 @@
 package rest;
 
 import lombok.extern.jbosslog.JBossLog;
-import rest.path.RestPath;
+import rest.configuration.path.RestPath;
 import testing.InfuraService;
 
 import javax.inject.Inject;

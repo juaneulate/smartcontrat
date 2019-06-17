@@ -4,14 +4,13 @@ package rest;
 import dao.LoginDao;
 import entity.UserEntity;
 import lombok.extern.jbosslog.JBossLog;
-import rest.path.RestPath;
+import rest.configuration.path.RestPath;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Optional;
 
 @Path(RestPath.REST_USER)
