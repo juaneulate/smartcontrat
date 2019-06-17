@@ -1,6 +1,5 @@
 package dao;
 
-import entity.ContractEntity;
 import entity.UserEntity;
 
 import javax.inject.Named;

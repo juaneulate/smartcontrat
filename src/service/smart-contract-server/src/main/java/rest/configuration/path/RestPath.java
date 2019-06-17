@@ -19,6 +19,7 @@ public final class RestPath {
 
     //region Utils
 
+    public static final String TEST_SQL = "test-sql";
     public static final String TEST_GET = "test-get-service";
     public static final String TEST_GET_SERVICE_WITH_PARAM = "test-get-service-with-param";
     public static final String TEST_POST = "testing-post-service";
@@ -38,6 +39,7 @@ public final class RestPath {
     public static final String AUTHENTICATE = "authenticate";
     public static final String AUTH = "auth";
     public static final String ALL = "all";
+    public static final String LOGIN = "login";
 
     //endregion
 
@@ -45,6 +47,8 @@ public final class RestPath {
     //region Commons Params
 
     public static final String CODE = "code";
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
 
     //endregion Commons Params
 

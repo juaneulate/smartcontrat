@@ -1,15 +1,18 @@
 package rest;
 
+import dao.UtilDao;
 import dto.DetailTestDto;
 import dto.TestDto;
 import lombok.extern.jbosslog.JBossLog;
 import rest.configuration.path.RestPath;
 import utils.JsonUtil;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.Serializable;
+import java.util.Date;
 
 @Path(RestPath.REST_UTIL)
 @Produces({MediaType.APPLICATION_JSON})
@@ -17,13 +20,27 @@ import java.io.Serializable;
 @JBossLog
 public class UtilRest implements Serializable {
 
+    @Inject
+    private UtilDao utilDao;
+
+    @GET
+    @Path(RestPath.TEST_SQL)
+    public Response testingSQlService() {
+        try {
+            log.info("Testing Rest DB");
+            Date currentTimeStamp = utilDao.currentTimeStamp();
+            return Response.ok(currentTimeStamp.toString()).build();
+        } catch (Exception e) {
+            log.info(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
     @GET
     @Path(RestPath.TEST_GET)
     public Response testingGetService() {
         try {
-            //log.info("testingGetService");
-
-
+            log.info("testingGetService");
 
             return Response.ok("testing Get Service OK").build();
         } catch (Exception e) {

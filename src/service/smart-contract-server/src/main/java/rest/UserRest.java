@@ -20,23 +20,19 @@ import java.util.Optional;
 public class UserRest implements Serializable {
 
     @Inject
-    LoginDao loginDao;
+    private LoginDao loginDao;
 
     @GET
-    @Path("/login")
-    public Response restValidateLogin(@QueryParam("username")String username, @QueryParam("password")String password ) {
+    @Path(RestPath.LOGIN)
+    public Response restValidateLogin(@QueryParam(RestPath.USERNAME) String username,
+                                      @QueryParam(RestPath.PASSWORD) String password) {
         try {
-            // log.info("restInfuraService");
-
-            Optional<UserEntity> userEntity=loginDao.validateUser(username,password);
-            if(userEntity.isPresent()){
-                return Response.ok(true).build();
-            }
-
-
-            return Response.ok(false).build();
+            log.info("restValidateLogin");
+            Optional<UserEntity> userEntity = loginDao.validateUser(username, password);
+            log.info("userEntity.isPresent() : " + userEntity.isPresent());
+            return Response.ok(userEntity.isPresent()).build();
         } catch (Exception e) {
-            //log.error(e);
+            log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
