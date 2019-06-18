@@ -16,6 +16,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.Serializable;
+import java.util.List;
 
 @Path(RestPath.REST_PERSON)
 @Produces({MediaType.APPLICATION_JSON})
@@ -53,13 +54,56 @@ public class PersonRest implements Serializable {
     public Response saveArrendatary(String jsonBody) {
         try {
           //  log.info("testingPostService" + jsonBody);
-            System.out.println("jsonPropietary: "+jsonBody);
+            System.out.println("jsonArrendatary: "+jsonBody);
             TypeToken<PersonEntity> typeToken= new TypeToken<PersonEntity>(){};
             PersonEntity personPropietary= JsonUtil.fromJson(jsonBody,typeToken);
             System.out.println(personPropietary);
             personPropietary.setPersonType(false);
             personDao.persist(personPropietary);
             return Response.ok(true).build();
+        } catch (Exception e) {
+          //  log.error(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path(RestPath.LIST)
+    public Response getPersonList() {
+        try {
+          //  log.info("testingPostService" + jsonBody);
+            System.out.println("jsonPerson: ");
+            List<PersonEntity> personList = personDao.getPersonList();
+            return Response.ok(personList).build();
+        } catch (Exception e) {
+          //  log.error(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path(RestPath.LIST)
+    public Response getOwnerList() {
+        try {
+          //  log.info("testingPostService" + jsonBody);
+            System.out.println("jsonPropietary: ");
+            List<PersonEntity> personList = personDao.getOwnerList();
+            return Response.ok(personList).build();
+        } catch (Exception e) {
+          //  log.error(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+
+    @GET
+    @Path(RestPath.LIST)
+    public Response getArrendataryList() {
+        try {
+          //  log.info("testingPostService" + jsonBody);
+            System.out.println("jsonArrendatary: ");
+            List<PersonEntity> personList = personDao.getArrendataryList();
+            return Response.ok(personList).build();
         } catch (Exception e) {
           //  log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
