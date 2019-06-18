@@ -22,12 +22,12 @@ public class LoginDao extends BaseDaoImpl {
         return resultList.isEmpty() ? Optional.empty() : Optional.of(resultList.get(0));
     }
 
-    public Optional<PersonEntity> getPersonByUserName(String UserName) {
+    public Optional<PersonEntity> getPersonByUserName(String login) {
         String hql = "SELECT le.personEntity " +
                 " FROM LoginEntity le join" +
-                "  fetch le.personEntity where le.login = :userName ";
+                "  fetch le.personEntity where le.login = :login ";
         TypedQuery<PersonEntity> query = em.createQuery(hql, PersonEntity.class);
-        query.setParameter("userName", UserName);
+        query.setParameter("login", login);
 
         List<PersonEntity> resultList = query.getResultList();
         return resultList.isEmpty() ? Optional.empty() : Optional.of(resultList.get(0));
