@@ -82,7 +82,7 @@ public class PersonRest implements Serializable {
     }
 
     @GET
-    @Path(RestPath.LIST)
+    @Path(RestPath.LIST_OWNER)
     public Response getOwnerList() {
         try {
           //  log.info("testingPostService" + jsonBody);
@@ -97,7 +97,7 @@ public class PersonRest implements Serializable {
 
 
     @GET
-    @Path(RestPath.LIST)
+    @Path(RestPath.LIST_ARRENDATARY)
     public Response getArrendataryList() {
         try {
           //  log.info("testingPostService" + jsonBody);

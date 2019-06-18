@@ -36,6 +36,8 @@ public final class RestPath {
     //region Common Paths
 
     public static final String LIST = "list";
+    public static final String LIST_OWNER = "list-owner";
+    public static final String LIST_ARRENDATARY = "list-arrendatary";
     public static final String CREATE = "create";
     public static final String CONFIRM = "confirm";
     public static final String REGISTER = "register";
