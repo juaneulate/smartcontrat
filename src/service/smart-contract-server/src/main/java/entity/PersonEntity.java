@@ -1,25 +1,21 @@
 package entity;
 
 import entity.config.EntityPath;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = {"personId"})
 @Entity
 @Table(name = EntityPath.PERSON)
 public class PersonEntity implements Serializable {
-
-    public PersonEntity(String lastName, int age, boolean personType) {
-        this.lastName = lastName;
-        this.age = age;
-        this.personType = personType;
-    }
 
     @Id
     @GeneratedValue(generator = EntityPath.PERSON_GENERATOR, strategy = GenerationType.SEQUENCE)
@@ -42,12 +38,15 @@ public class PersonEntity implements Serializable {
 
     @JsonIgnore
     @Transient
-    public boolean isNew() {
-        return personId == 0;
+    public static PersonEntity build(String lastName, int age, boolean personType) {
+        return PersonEntity.builder().lastName(lastName).age(age).personType(personType).build();
     }
 
-    public void setPersonType(boolean personType) {
-        this.personType = personType;
+
+    @JsonIgnore
+    @Transient
+    public boolean isNew() {
+        return personId == 0;
     }
 
 }

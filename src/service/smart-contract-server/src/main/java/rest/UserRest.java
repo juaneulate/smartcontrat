@@ -47,7 +47,7 @@ public class UserRest implements Serializable {
      //       log.info("restValidateLogin");
             Optional<PersonEntity> PersonEntity = loginDao.getPersonByUserName(username);
         //   log.info("userEntity.isPresent() : " + userEntity.isPresent());
-            return Response.ok(PersonEntity.isPresent()).build();
+            return Response.ok(PersonEntity.get()).build();
         } catch (Exception e) {
 //           log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

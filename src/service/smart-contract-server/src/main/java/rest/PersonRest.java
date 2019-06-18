@@ -39,8 +39,8 @@ public class PersonRest implements Serializable {
             System.out.println("jsonPropietary: "+jsonBody);
             TypeToken<PersonLoginDto> typeToken= new TypeToken<PersonLoginDto>(){};
             PersonLoginDto personLoginDto= JsonUtil.fromJson(jsonBody,typeToken);
-            PersonEntity personEntity= new PersonEntity(personLoginDto.getLastname(),personLoginDto.getAge(),true);
-            LoginEntity loginEntity=new LoginEntity(personLoginDto.getLogin(),personLoginDto.getPassword(),personEntity);
+            PersonEntity personEntity = PersonEntity.build(personLoginDto.getLastname(),personLoginDto.getAge(),true);
+            LoginEntity loginEntity = LoginEntity.build(personLoginDto.getLogin(),personLoginDto.getPassword(),personEntity);
             personDao.persist(loginEntity);
             return Response.ok(true).build();
         } catch (Exception e) {

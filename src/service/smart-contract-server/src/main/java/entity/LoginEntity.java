@@ -1,18 +1,13 @@
 package entity;
 
 import entity.config.EntityPath;
-import enums.EnumTest;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,13 +15,6 @@ import java.util.List;
 @Entity
 @Table(name = EntityPath.LOGIN)
 public class LoginEntity implements Serializable {
-
-
-    public LoginEntity(String login, String password, PersonEntity personEntity) {
-        this.login = login;
-        this.password = password;
-        this.personEntity = personEntity;
-    }
 
     @Id
     @GeneratedValue(generator = EntityPath.LOGIN_GENERATOR, strategy = GenerationType.SEQUENCE)
@@ -39,10 +27,16 @@ public class LoginEntity implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToOne(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
-    @JoinColumn(name="idpersona")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "idpersona")
     private PersonEntity personEntity;
 
+
+    @JsonIgnore
+    @Transient
+    public static LoginEntity build(String login, String password, PersonEntity personEntity) {
+        return LoginEntity.builder().login(login).password(password).personEntity(personEntity).build();
+    }
 
     @JsonIgnore
     @Transient

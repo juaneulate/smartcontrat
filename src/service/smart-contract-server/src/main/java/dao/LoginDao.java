@@ -24,8 +24,8 @@ public class LoginDao extends BaseDaoImpl {
 
     public Optional<PersonEntity> getPersonByUserName(String UserName) {
         String hql = "SELECT le.personEntity " +
-                " FROM LoginEntity le join" +
-                "  fetch le.personEntity where le.login = :userName ";
+                " FROM LoginEntity le" +
+                " where le.login = :userName ";
         TypedQuery<PersonEntity> query = em.createQuery(hql, PersonEntity.class);
         query.setParameter("userName", UserName);
 
