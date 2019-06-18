@@ -21,7 +21,6 @@ import java.util.Optional;
 public class UserRest implements Serializable {
 
 
-
     @Inject
     private LoginDao loginDao;
 
@@ -30,9 +29,9 @@ public class UserRest implements Serializable {
     public Response restValidateLogin(@QueryParam(RestPath.LOGIN) String login,
                                       @QueryParam(RestPath.PASSWORD) String password) {
         try {
-     //       log.info("restValidateLogin");
+            //       log.info("restValidateLogin");
             Optional<LoginEntity> userEntity = loginDao.validateUser(login, password);
-        //   log.info("userEntity.isPresent() : " + userEntity.isPresent());
+            //   log.info("userEntity.isPresent() : " + userEntity.isPresent());
             return Response.ok(userEntity.isPresent()).build();
         } catch (Exception e) {
 //           log.error(e);
@@ -44,10 +43,14 @@ public class UserRest implements Serializable {
     @Path(RestPath.GET_PERSON)
     public Response getPersonByUserName(@QueryParam(RestPath.LOGIN) String login) {
         try {
-     //       log.info("restValidateLogin");
-            Optional<PersonEntity> PersonEntity = loginDao.getPersonByUserName(login);
-        //   log.info("userEntity.isPresent() : " + userEntity.isPresent());
-            return Response.ok(PersonEntity.get()).build();
+            //       log.info("restValidateLogin");
+            Optional<PersonEntity> personOpt = loginDao.getPersonByUserName(login);
+            //   log.info("userEntity.isPresent() : " + userEntity.isPresent());
+            if (personOpt.isPresent()) {
+                return Response.ok(personOpt.get()).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
         } catch (Exception e) {
 //           log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
