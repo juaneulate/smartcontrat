@@ -41,4 +41,8 @@ public class ContractService implements Serializable {
         return contractDao.getById(id);
     }
 
+    public List<ContractEntity> findAllByPersonId(long personId) {
+        return contractDao.findAllByPersonId(personId);
+    }
+
 }
