@@ -1,0 +1,31 @@
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class ArrendatarioService {
+
+    constructor(
+        private http: HttpClient
+    ) {
+    }
+
+    baseUrl = 'http://52.15.237.224:8080/rest/person/';
+
+    save(lastName: string, age: number, username: string, password: string) {
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+
+        const body = {
+            lastName,
+            age,
+            username,
+            password
+        };
+
+        return this.http.post<boolean>(this.baseUrl + 'arrendatary-save', body, {headers});
+
+    }
+
+}
