@@ -59,6 +59,7 @@ public final class RestPath {
 
     public static final String LAST_NAME = "lastName";
     public static final String AGE = "age";
+    public static final String GET_PERSON = "get-person";
 
 
 

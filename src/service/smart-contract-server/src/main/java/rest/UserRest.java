@@ -3,6 +3,7 @@ package rest;
 
 import dao.LoginDao;
 import entity.LoginEntity;
+import entity.PersonEntity;
 import lombok.extern.jbosslog.JBossLog;
 import rest.configuration.path.RestPath;
 
@@ -26,13 +27,27 @@ public class UserRest implements Serializable {
 
     @GET
     @Path(RestPath.LOGIN)
-    public Response restValidateLogin(@QueryParam(RestPath.USERNAME) String username,
+    public Response restValidateLogin(@QueryParam(RestPath.LOGIN) String username,
                                       @QueryParam(RestPath.PASSWORD) String password) {
         try {
      //       log.info("restValidateLogin");
             Optional<LoginEntity> userEntity = loginDao.validateUser(username, password);
         //   log.info("userEntity.isPresent() : " + userEntity.isPresent());
             return Response.ok(userEntity.isPresent()).build();
+        } catch (Exception e) {
+//           log.error(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path(RestPath.GET_PERSON)
+    public Response getPersonByUserName(@QueryParam(RestPath.LOGIN) String username) {
+        try {
+     //       log.info("restValidateLogin");
+            Optional<PersonEntity> PersonEntity = loginDao.getPersonByUserName(username);
+        //   log.info("userEntity.isPresent() : " + userEntity.isPresent());
+            return Response.ok(PersonEntity.isPresent()).build();
         } catch (Exception e) {
 //           log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

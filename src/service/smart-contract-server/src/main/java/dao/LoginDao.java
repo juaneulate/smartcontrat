@@ -1,6 +1,7 @@
 package dao;
 
 import entity.LoginEntity;
+import entity.PersonEntity;
 
 import javax.inject.Named;
 import javax.persistence.TypedQuery;
@@ -18,6 +19,17 @@ public class LoginDao extends BaseDaoImpl {
         query.setParameter("login", login);
         query.setParameter("password", password);
         List<LoginEntity> resultList = query.getResultList();
+        return resultList.isEmpty() ? Optional.empty() : Optional.of(resultList.get(0));
+    }
+
+    public Optional<PersonEntity> getPersonByUserName(String UserName) {
+        String hql = "SELECT ue.personEntity " +
+                " FROM LoginEntity le" +
+                " where le.login = :userName ";
+        TypedQuery<PersonEntity> query = em.createQuery(hql, PersonEntity.class);
+        query.setParameter("userName", UserName);
+
+        List<PersonEntity> resultList = query.getResultList();
         return resultList.isEmpty() ? Optional.empty() : Optional.of(resultList.get(0));
     }
 }
