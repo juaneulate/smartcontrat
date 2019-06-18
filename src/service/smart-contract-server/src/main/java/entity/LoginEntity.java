@@ -35,7 +35,7 @@ public class LoginEntity implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
     @JoinColumn(name="idpersona")
     private PersonEntity personEntity;
 
