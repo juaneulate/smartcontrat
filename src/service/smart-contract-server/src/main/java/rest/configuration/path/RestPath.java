@@ -28,6 +28,8 @@ public final class RestPath {
     public static final String TEST_PUT = "test-put-service";
     public static final String TEST_POST_PROPIETARY_SAVE = "propietary-save";
     public static final String TEST_POST_ARRENDETARY_SAVE = "arrendatary-save";
+    public static final String TEST_GET_PROPIETARY = "get-propietary";
+    public static final String TEST_GET_ARRENDETARY = "get-arrendatary";
 
     //endregion
 

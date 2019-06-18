@@ -14,28 +14,31 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(of = {"id"})
 @Entity
-@Table(name = EntityPath.USER)
-public class UserEntity implements Serializable {
+@Table(name = EntityPath.LOGIN)
+public class LoginEntity implements Serializable {
+
+
+    public LoginEntity(String login, String password, PersonEntity personEntity) {
+        this.login = login;
+        this.password = password;
+        this.personEntity = personEntity;
+    }
 
     @Id
-    @GeneratedValue(generator = EntityPath.USER_GENERATOR, strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = EntityPath.USER_GENERATOR, sequenceName = EntityPath.USER_SEQUENCE, allocationSize = 1)
+    @GeneratedValue(generator = EntityPath.LOGIN_GENERATOR, strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = EntityPath.LOGIN_GENERATOR, sequenceName = EntityPath.LOGIN_SEQUENCE, allocationSize = 1)
     private long id;
 
     @Column(name = "login", nullable = false)
     private String login;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
     @Column(name = "password", nullable = false)
     private String password;
 
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="idpersona")
+    private PersonEntity personEntity;
 
-    @JsonIgnore
-    @Version
-    @Column(name = "version_update")
-    private Long version;
 
     @JsonIgnore
     @Transient

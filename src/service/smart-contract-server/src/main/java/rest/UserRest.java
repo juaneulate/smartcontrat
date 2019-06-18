@@ -2,7 +2,7 @@ package rest;
 
 
 import dao.LoginDao;
-import entity.UserEntity;
+import entity.LoginEntity;
 import lombok.extern.jbosslog.JBossLog;
 import rest.configuration.path.RestPath;
 
@@ -19,6 +19,8 @@ import java.util.Optional;
 @JBossLog
 public class UserRest implements Serializable {
 
+
+
     @Inject
     private LoginDao loginDao;
 
@@ -27,12 +29,12 @@ public class UserRest implements Serializable {
     public Response restValidateLogin(@QueryParam(RestPath.USERNAME) String username,
                                       @QueryParam(RestPath.PASSWORD) String password) {
         try {
-            //log.info("restValidateLogin");
-            Optional<UserEntity> userEntity = loginDao.validateUser(username, password);
-           // log.info("userEntity.isPresent() : " + userEntity.isPresent());
+     //       log.info("restValidateLogin");
+            Optional<LoginEntity> userEntity = loginDao.validateUser(username, password);
+        //   log.info("userEntity.isPresent() : " + userEntity.isPresent());
             return Response.ok(userEntity.isPresent()).build();
         } catch (Exception e) {
-           // log.error(e);
+//           log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }

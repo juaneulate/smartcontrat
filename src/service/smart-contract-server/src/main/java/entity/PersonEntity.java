@@ -7,12 +7,19 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(of = {"personId"})
 @Entity
 @Table(name = EntityPath.PERSON)
 public class PersonEntity implements Serializable {
+
+    public PersonEntity(String lastName, int age, boolean personType) {
+        this.lastName = lastName;
+        this.age = age;
+        this.personType = personType;
+    }
 
     @Id
     @GeneratedValue(generator = EntityPath.PERSON_GENERATOR, strategy = GenerationType.SEQUENCE)
@@ -26,11 +33,11 @@ public class PersonEntity implements Serializable {
     @Column(name = "edad", nullable = false)
     private int age;
 
-
-
     @Column(name = "tipopersona", nullable = false)
     private boolean personType;
 
+   /* @OneToOne(fetch=FetchType.LAZY, mappedBy="personEntity")
+    private LoginEntity loginEntity;*/
 
 
     @JsonIgnore

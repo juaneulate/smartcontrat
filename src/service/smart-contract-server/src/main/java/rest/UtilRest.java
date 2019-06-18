@@ -4,6 +4,7 @@ import dao.UtilDao;
 import dto.DetailTestDto;
 import dto.TestDto;
 import lombok.extern.jbosslog.JBossLog;
+import org.jboss.logging.Logger;
 import rest.configuration.path.RestPath;
 import utils.JsonUtil;
 
@@ -20,6 +21,8 @@ import java.util.Date;
 @JBossLog
 public class UtilRest implements Serializable {
 
+
+
     @Inject
     private UtilDao utilDao;
 
@@ -27,11 +30,11 @@ public class UtilRest implements Serializable {
     @Path(RestPath.TEST_SQL)
     public Response testingSQlService() {
         try {
-            //log.info("Testing Rest DB");
+          //  log.info("Testing Rest DB");
             Date currentTimeStamp = utilDao.currentTimeStamp();
             return Response.ok(currentTimeStamp.toString()).build();
         } catch (Exception e) {
-           // log.info(e);
+         //  log.info(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
@@ -44,7 +47,7 @@ public class UtilRest implements Serializable {
 
             return Response.ok("testing Get Service OK").build();
         } catch (Exception e) {
-            //log.error(e);
+          //  log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
@@ -52,12 +55,12 @@ public class UtilRest implements Serializable {
     @GET
     @Path(RestPath.TEST_GET_SERVICE_WITH_PARAM)
     public Response testingGetWithParamService(@QueryParam(RestPath.CODE) String code) {
-        //log.info("testingGetWithParamService : " + code);
+//        log.info("testingGetWithParamService : " + code);
         try {
-            //log.info("testingGetWithParamService: " + code);
+         //   log.info("testingGetWithParamService: " + code);
             return Response.ok("testingGetWithParamService : " + code).build();
         } catch (Exception e) {
-            //log.error(e);
+          //  log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
@@ -66,10 +69,10 @@ public class UtilRest implements Serializable {
     @Path(RestPath.TEST_POST)
     public Response testingPostService(String jsonBody) {
         try {
-            //log.info("testingPostService" + jsonBody);
+         //   log.info("testingPostService" + jsonBody);
             return Response.ok(jsonBody).build();
         } catch (Exception e) {
-            //log.error(e);
+         //   log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
@@ -78,10 +81,10 @@ public class UtilRest implements Serializable {
     @Path(RestPath.TEST_POST_WITH_DTO)
     public Response testingPostWithDtoService(TestDto myDto) {
         try {
-            //log.info("testingPostWithDtoService :  " + JsonUtil.toJson(myDto));
+          //  log.info("testingPostWithDtoService :  " + JsonUtil.toJson(myDto));
             return Response.ok(JsonUtil.toJson(myDto)).build();
         } catch (Exception e) {
-            //log.error(e);
+          //  log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
@@ -90,10 +93,10 @@ public class UtilRest implements Serializable {
     @Path(RestPath.TEST_PUT)
     public Response testingPutService(DetailTestDto detailTestDto) {
         try {
-            //log.info("testingPutService");
+           // log.info("testingPutService");
             return Response.ok(JsonUtil.toJson(detailTestDto)).build();
         } catch (Exception e) {
-            //log.error(e);
+           // log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
