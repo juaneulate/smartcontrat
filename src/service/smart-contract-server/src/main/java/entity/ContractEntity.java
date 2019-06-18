@@ -38,8 +38,9 @@ public class ContractEntity implements Serializable {
     @Column(name = "nombre_contrato")
     private String nombre_contrato;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "idpersona")
+    @JsonIgnore
     private PersonEntity personEntity;
 
     @JsonIgnore
