@@ -13,7 +13,7 @@ public class LoginDao extends BaseDaoImpl {
 
     public Optional<LoginEntity> validateUser(String login, String password) {
         String hql = "SELECT ue " +
-                " FROM UserEntity ue " +
+                " FROM LoginEntity ue " +
                 " WHERE ue.login=:login and ue.password=:password ";
         TypedQuery<LoginEntity> query = em.createQuery(hql, LoginEntity.class);
         query.setParameter("login", login);
@@ -23,9 +23,9 @@ public class LoginDao extends BaseDaoImpl {
     }
 
     public Optional<PersonEntity> getPersonByUserName(String UserName) {
-        String hql = "SELECT ue.personEntity " +
-                " FROM LoginEntity le" +
-                " where le.login = :userName ";
+        String hql = "SELECT le.personEntity " +
+                " FROM LoginEntity le join" +
+                "  fetch le.personEntity where le.login = :userName ";
         TypedQuery<PersonEntity> query = em.createQuery(hql, PersonEntity.class);
         query.setParameter("userName", UserName);
 
