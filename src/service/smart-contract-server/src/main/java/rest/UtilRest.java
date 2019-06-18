@@ -27,11 +27,11 @@ public class UtilRest implements Serializable {
     @Path(RestPath.TEST_SQL)
     public Response testingSQlService() {
         try {
-            log.info("Testing Rest DB");
+            //log.info("Testing Rest DB");
             Date currentTimeStamp = utilDao.currentTimeStamp();
             return Response.ok(currentTimeStamp.toString()).build();
         } catch (Exception e) {
-            log.info(e);
+           // log.info(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
@@ -40,7 +40,7 @@ public class UtilRest implements Serializable {
     @Path(RestPath.TEST_GET)
     public Response testingGetService() {
         try {
-            log.info("testingGetService");
+           // log.info("testingGetService");
 
             return Response.ok("testing Get Service OK").build();
         } catch (Exception e) {

@@ -24,6 +24,10 @@ public class EntityPath {
     public static final String USER_GENERATOR = GENERATOR + SEPARATOR + USER;
     public static final String USER_SEQUENCE = USER + SEPARATOR + SEQUENCE;
 
+    public static final String PERSON = "persona";
+    public static final String PERSON_GENERATOR = GENERATOR + SEPARATOR + PERSON;
+    public static final String PERSON_SEQUENCE = PERSON + SEPARATOR + SEQUENCE;
+
 
 
 

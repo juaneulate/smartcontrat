@@ -27,12 +27,12 @@ public class UserRest implements Serializable {
     public Response restValidateLogin(@QueryParam(RestPath.USERNAME) String username,
                                       @QueryParam(RestPath.PASSWORD) String password) {
         try {
-            log.info("restValidateLogin");
+            //log.info("restValidateLogin");
             Optional<UserEntity> userEntity = loginDao.validateUser(username, password);
-            log.info("userEntity.isPresent() : " + userEntity.isPresent());
+           // log.info("userEntity.isPresent() : " + userEntity.isPresent());
             return Response.ok(userEntity.isPresent()).build();
         } catch (Exception e) {
-            log.error(e);
+           // log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }

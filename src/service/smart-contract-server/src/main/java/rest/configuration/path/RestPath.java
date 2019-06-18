@@ -14,6 +14,7 @@ public final class RestPath {
     public static final String REST_CONTRACT = "contract";
     public static final String REST_INFURA = "infura";
     public static final String REST_USER = "user";
+    public static final String REST_PERSON = "person";
 
     //endregion
 
@@ -25,6 +26,8 @@ public final class RestPath {
     public static final String TEST_POST = "testing-post-service";
     public static final String TEST_POST_WITH_DTO = "testing-post-with-dto";
     public static final String TEST_PUT = "test-put-service";
+    public static final String TEST_POST_PROPIETARY_SAVE = "propietary-save";
+    public static final String TEST_POST_ARRENDETARY_SAVE = "arrendatary-save";
 
     //endregion
 
@@ -49,6 +52,12 @@ public final class RestPath {
     public static final String CODE = "code";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
+
+    public static final String LAST_NAME = "lastName";
+    public static final String AGE = "age";
+
+
+
 
     //endregion Commons Params
 
