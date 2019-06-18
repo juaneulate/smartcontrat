@@ -27,11 +27,11 @@ public class UserRest implements Serializable {
 
     @GET
     @Path(RestPath.LOGIN)
-    public Response restValidateLogin(@QueryParam(RestPath.LOGIN) String username,
+    public Response restValidateLogin(@QueryParam(RestPath.LOGIN) String login,
                                       @QueryParam(RestPath.PASSWORD) String password) {
         try {
      //       log.info("restValidateLogin");
-            Optional<LoginEntity> userEntity = loginDao.validateUser(username, password);
+            Optional<LoginEntity> userEntity = loginDao.validateUser(login, password);
         //   log.info("userEntity.isPresent() : " + userEntity.isPresent());
             return Response.ok(userEntity.isPresent()).build();
         } catch (Exception e) {
@@ -42,10 +42,10 @@ public class UserRest implements Serializable {
 
     @GET
     @Path(RestPath.GET_PERSON)
-    public Response getPersonByUserName(@QueryParam(RestPath.LOGIN) String username) {
+    public Response getPersonByUserName(@QueryParam(RestPath.LOGIN) String login) {
         try {
      //       log.info("restValidateLogin");
-            Optional<PersonEntity> PersonEntity = loginDao.getPersonByUserName(username);
+            Optional<PersonEntity> PersonEntity = loginDao.getPersonByUserName(login);
         //   log.info("userEntity.isPresent() : " + userEntity.isPresent());
             return Response.ok(PersonEntity.get()).build();
         } catch (Exception e) {
