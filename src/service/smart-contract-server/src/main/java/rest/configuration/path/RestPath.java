@@ -38,6 +38,7 @@ public final class RestPath {
     public static final String LIST = "list";
     public static final String LIST_OWNER = "list-owner";
     public static final String LIST_TENANT = "list-tenant";
+    public static final String SAVE = "save";
     public static final String CREATE = "create";
     public static final String CONFIRM = "confirm";
     public static final String REGISTER = "register";

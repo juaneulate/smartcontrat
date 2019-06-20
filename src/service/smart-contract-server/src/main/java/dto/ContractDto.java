@@ -1,5 +1,6 @@
 package dto;
 
+import entity.PersonEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,15 @@ public class ContractDto {
     private BigDecimal cuota;
     private boolean estadoContrato;
     private String nombreContrato;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getRegistroBilletera() {
         return registroBilletera;

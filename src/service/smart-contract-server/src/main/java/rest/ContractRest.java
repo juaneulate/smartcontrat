@@ -5,9 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import dao.ContractDao;
 import dao.LoginDao;
 import dto.ContractDto;
-import dto.PersonLoginDto;
 import entity.ContractEntity;
-import entity.LoginEntity;
 import entity.PersonEntity;
 import lombok.extern.jbosslog.JBossLog;
 import rest.configuration.path.RestPath;
@@ -34,6 +32,9 @@ public class ContractRest implements Serializable {
 
     @Inject
     private ContractDao contractDao;
+
+    @Inject
+    private  LoginDao loginDao;
 
     @GET
     @Path(RestPath.LIST)
@@ -67,13 +68,14 @@ public class ContractRest implements Serializable {
         }
     }
     @POST
-    @Path(RestPath.LIST)
+    @Path(RestPath.SAVE)
     public Response resContractSave(String jsonBody) {
         try {
             //log.info("testingPostService" + jsonBody);
             System.out.println("jsonPropietary: "+jsonBody);
             ContractEntity contractEntity = getContractEntity(jsonBody);
-            contractDao.persist(contractEntity);
+            System.out.println(contractEntity);
+            contractDao.merge(contractEntity);
             return Response.ok(true).build();
         } catch (Exception e) {
             // log.error(e);
@@ -81,11 +83,13 @@ public class ContractRest implements Serializable {
         }
     }
 
-    public ContractEntity getContractEntity(String jsonBody) {
+    private ContractEntity getContractEntity(String jsonBody) {
         TypeToken<ContractDto> typeToken = new TypeToken<ContractDto>() {};
         ContractDto contractDto = JsonUtil.fromJson(jsonBody, typeToken);
-        ContractEntity contractEntity = ContractEntity.build(contractDto.getRegistroBilletera(),contractDto.getMontoTotal(),contractDto.getCuota(),contractDto.isEstadoContrato(),contractDto.getNombreContrato());
-        return ContractEntity.build(contractDto.getRegistroBilletera(),contractDto.getCuota(),contractDto.getCuota(),contractDto.isEstadoContrato(),contractDto.getNombreContrato(),contractEntity);
+        PersonEntity personEntity= loginDao.getPersonByUserName(contractDto.getUsername()).get();
+        System.out.println(personEntity);
+       /* ContractEntity contractEntity = ContractEntity.build(contractDto.getRegistroBilletera(),contractDto.getMontoTotal(),contractDto.getCuota(),contractDto.isEstadoContrato(),contractDto.getNombreContrato(),personEntity);*/
+        return ContractEntity.build(contractDto.getRegistroBilletera(),contractDto.getCuota(),contractDto.getCuota(),contractDto.isEstadoContrato(),contractDto.getNombreContrato(),personEntity);
     }
 
 

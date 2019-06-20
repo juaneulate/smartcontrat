@@ -2,8 +2,7 @@ package entity;
 
 import entity.config.EntityPath;
 import enums.EnumTest;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -12,7 +11,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+@Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = {"idcontrato"})
 @Entity
 @Table(name = EntityPath.CONTRACT)
@@ -24,23 +26,22 @@ public class ContractEntity implements Serializable {
     private long idcontrato;
 
     @Column(name = "reg_billetera")
-    private String registro_billetera;
+    private String registroBilletera;
 
     @Column(name = "monto_total")
-    private BigDecimal monto_total;
+    private BigDecimal montoTotal;
 
     @Column(name = "cuota")
     private BigDecimal cuota;
 
     @Column(name = "estado_contrato")
-    private Boolean estado_contrato;
+    private Boolean estadoContrato;
 
     @Column(name = "nombre_contrato")
-    private String nombre_contrato;
+    private String nombreContrato;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "idpersona")
-    @JsonIgnore
     private PersonEntity personEntity;
 
     @JsonIgnore
@@ -51,9 +52,21 @@ public class ContractEntity implements Serializable {
 
     @JsonIgnore
     @Transient
-    public static ContractEntity build(String registro_billetera,BigDecimal monto_total, BigDecimal cuota, boolean estado_contrato,String nombre_contrato,PersonEntity personEntity) {
-        return ContractEntity.builder().registro_billetera(registro_billetera).monto_total(monto_total).cuota(cuota).estado_contrato(estado_contrato).nombre_contrato(nombre_contrato).personEntity.(personEntity).build();
+    public static ContractEntity build(String registroBilletera,BigDecimal montoTotal,
+                                       BigDecimal cuota, boolean estadoContrato,String nombreContrato,PersonEntity personEntity) {
+        return ContractEntity.builder().registroBilletera(registroBilletera).montoTotal(montoTotal).cuota(cuota).estadoContrato(estadoContrato).nombreContrato(nombreContrato).personEntity(personEntity).build();
     }
 
+ /*   public ContractEntity(String registroBilletera,BigDecimal montoTotal,
+                                 BigDecimal cuota, boolean estadoContrato,String nombreContrato,PersonEntity personEntity){
 
+        this.registroBilletera=registroBilletera;
+        this.montoTotal=montoTotal;
+        this.cuota=cuota;
+        this.estadoContrato=estadoContrato;
+        this.nombreContrato=nombreContrato;
+        this.personEntity=personEntity;
+
+
+    }*/
 }
