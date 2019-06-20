@@ -2,6 +2,7 @@ package dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 
 public class BaseDaoImpl implements Serializable {
@@ -19,8 +20,11 @@ public class BaseDaoImpl implements Serializable {
         return entity;
     }
 
+    @Transactional
     public <T> void persist(T entity) {
+
         em.persist(entity);
+
     }
 
     public <T> void remove(T entity) {

@@ -8,11 +8,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"idcontrato"})
 @Entity
 @Table(name = EntityPath.CONTRACT)
 public class ContractEntity implements Serializable {
@@ -20,31 +21,32 @@ public class ContractEntity implements Serializable {
     @Id
     @GeneratedValue(generator = EntityPath.CONTRACT_GENERATOR, strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = EntityPath.CONTRACT_GENERATOR, sequenceName = EntityPath.CONTRACT_SEQUENCE, allocationSize = 1)
-    private long id;
+    private long idcontrato;
 
-    @Column(name = "customer_id")
-    private long customerId;
+    @Column(name = "reg_billetera")
+    private String reg_billetera;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "start_date", nullable = false)
-    private Date startDate;
+    @Column(name = "monto_total")
+    private BigDecimal monto_total;
 
-    @Column(name = "enum_test", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private EnumTest enumTest;
+    @Column(name = "cuota")
+    private BigDecimal cuota;
 
-    @OneToMany(mappedBy = "contract", fetch = FetchType.EAGER)
-    private List<ContractDetailEntity> detail;
+    @Column(name = "estado_contrato")
+    private Boolean estado_contrato;
 
+    @Column(name = "nombre_contrato")
+    private String nombre_contrato;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "idpersona")
     @JsonIgnore
-    @Version
-    @Column(name = "version_update")
-    private Long version;
+    private PersonEntity personEntity;
 
     @JsonIgnore
     @Transient
     public boolean isNew() {
-        return id == 0;
+        return idcontrato == 0;
     }
 
 }

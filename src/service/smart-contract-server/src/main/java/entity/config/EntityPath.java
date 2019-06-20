@@ -10,7 +10,7 @@ public class EntityPath {
     //endregion
 
 
-    public static final String CONTRACT = "contract";
+    public static final String CONTRACT = "contrato";
     public static final String CONTRACT_GENERATOR = GENERATOR + SEPARATOR + CONTRACT;
     public static final String CONTRACT_SEQUENCE = CONTRACT + SEPARATOR + SEQUENCE;
 
@@ -20,9 +20,13 @@ public class EntityPath {
     public static final String CONTRACT_DETAIL_SEQUENCE = CONTRACT_DETAIL + SEPARATOR + SEQUENCE;
 
 
-    public static final String USER = "users";
-    public static final String USER_GENERATOR = GENERATOR + SEPARATOR + USER;
-    public static final String USER_SEQUENCE = USER + SEPARATOR + SEQUENCE;
+    public static final String LOGIN = "login";
+    public static final String LOGIN_GENERATOR = GENERATOR + SEPARATOR + LOGIN;
+    public static final String LOGIN_SEQUENCE = LOGIN + SEPARATOR + SEQUENCE;
+
+    public static final String PERSON = "persona";
+    public static final String PERSON_GENERATOR = GENERATOR + SEPARATOR + PERSON;
+    public static final String PERSON_SEQUENCE = PERSON + SEPARATOR + SEQUENCE;
 
 
 
