@@ -13,7 +13,7 @@ public final class RestPath {
     public static final String REST_UTIL = "util";
     public static final String REST_CONTRACT = "contract";
     public static final String REST_INFURA = "infura";
-    public static final String REST_USER = "user";
+    public static final String REST_LOGIN = "login";
     public static final String REST_PERSON = "person";
 
     //endregion
@@ -46,7 +46,7 @@ public final class RestPath {
     public static final String AUTHENTICATE = "authenticate";
     public static final String AUTH = "auth";
     public static final String ALL = "all";
-    public static final String LOGIN = "login";
+    public static final String VALIDATE = "validate";
 
     //endregion
 
@@ -57,7 +57,6 @@ public final class RestPath {
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
 
-    public static final String LAST_NAME = "lastName";
     public static final String AGE = "age";
     public static final String GET_PERSON = "get-person";
 

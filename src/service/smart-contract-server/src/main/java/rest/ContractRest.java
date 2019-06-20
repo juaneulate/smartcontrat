@@ -45,7 +45,7 @@ public class ContractRest implements Serializable {
 
     @GET
     @Path(RestPath.LIST)
-    public Response restContractList(@QueryParam(RestPath.LOGIN) String login) {
+    public Response restContractList(@QueryParam(RestPath.VALIDATE) String login) {
         try {
             // log.info("restContractList");
             Optional<PersonEntity> personByUserNameOpt = loginDao.getPersonByUserName(login);

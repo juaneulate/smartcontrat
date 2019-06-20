@@ -37,10 +37,7 @@ public class PersonRest implements Serializable {
         try {
             //log.info("testingPostService" + jsonBody);
             System.out.println("jsonPropietary: "+jsonBody);
-            TypeToken<PersonLoginDto> typeToken= new TypeToken<PersonLoginDto>(){};
-            PersonLoginDto personLoginDto= JsonUtil.fromJson(jsonBody,typeToken);
-            PersonEntity personEntity = PersonEntity.build(personLoginDto.getLastname(),personLoginDto.getAge(),true);
-            LoginEntity loginEntity = LoginEntity.build(personLoginDto.getLogin(),personLoginDto.getPassword(),personEntity);
+            LoginEntity loginEntity = getLoginEntity(jsonBody, true);
             personDao.persist(loginEntity);
             return Response.ok(true).build();
         } catch (Exception e) {
@@ -54,17 +51,21 @@ public class PersonRest implements Serializable {
     public Response saveArrendatary(String jsonBody) {
         try {
           //  log.info("testingPostService" + jsonBody);
-            System.out.println("jsonArrendatary: "+jsonBody);
-            TypeToken<PersonEntity> typeToken= new TypeToken<PersonEntity>(){};
-            PersonEntity personPropietary= JsonUtil.fromJson(jsonBody,typeToken);
-            System.out.println(personPropietary);
-            personPropietary.setPersonType(false);
-            personDao.persist(personPropietary);
+            LoginEntity loginEntity = getLoginEntity(jsonBody, false);
+            personDao.persist(loginEntity);
             return Response.ok(true).build();
         } catch (Exception e) {
           //  log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
+    }
+
+    public LoginEntity getLoginEntity(String jsonBody, boolean b) {
+        TypeToken<PersonLoginDto> typeToken = new TypeToken<PersonLoginDto>() {
+        };
+        PersonLoginDto personLoginDto = JsonUtil.fromJson(jsonBody, typeToken);
+        PersonEntity personEntity = PersonEntity.build(personLoginDto.getLastname(), personLoginDto.getAge(), b);
+        return LoginEntity.build(personLoginDto.getLogin(), personLoginDto.getPassword(), personEntity);
     }
 
     @GET
