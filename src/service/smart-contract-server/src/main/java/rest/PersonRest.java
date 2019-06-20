@@ -1,7 +1,6 @@
 package rest;
 
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import dao.PersonDao;
 import dto.PersonLoginDto;
@@ -32,8 +31,8 @@ public class PersonRest implements Serializable {
 
 
     @POST
-    @Path(RestPath.TEST_POST_PROPIETARY_SAVE)
-    public Response savePropietary(String jsonBody) {
+    @Path(RestPath.TEST_POST_OWNER_SAVE)
+    public Response saveOwner(String jsonBody) {
         try {
             //log.info("testingPostService" + jsonBody);
             System.out.println("jsonPropietary: "+jsonBody);
@@ -47,8 +46,8 @@ public class PersonRest implements Serializable {
     }
 
     @POST
-    @Path(RestPath.TEST_POST_ARRENDETARY_SAVE)
-    public Response saveArrendatary(String jsonBody) {
+    @Path(RestPath.TEST_POST_TENANT_SAVE)
+    public Response saveTenant(String jsonBody) {
         try {
           //  log.info("testingPostService" + jsonBody);
             LoginEntity loginEntity = getLoginEntity(jsonBody, false);
@@ -98,8 +97,8 @@ public class PersonRest implements Serializable {
 
 
     @GET
-    @Path(RestPath.LIST_ARRENDATARY)
-    public Response getArrendataryList() {
+    @Path(RestPath.LIST_TENANT)
+    public Response getTenantList() {
         try {
           //  log.info("testingPostService" + jsonBody);
             System.out.println("jsonArrendatary: ");

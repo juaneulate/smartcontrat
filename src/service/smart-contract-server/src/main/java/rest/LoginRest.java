@@ -41,7 +41,7 @@ public class LoginRest implements Serializable {
 
     @GET
     @Path(RestPath.GET_PERSON)
-    public Response getPersonByUserName(@QueryParam(RestPath.VALIDATE) String login) {
+    public Response getPersonByUserName(@QueryParam(RestPath.USERNAME) String login) {
         try {
             //       log.info("restValidateLogin");
             Optional<PersonEntity> personOpt = loginDao.getPersonByUserName(login);

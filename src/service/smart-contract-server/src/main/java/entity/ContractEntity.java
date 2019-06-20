@@ -24,7 +24,7 @@ public class ContractEntity implements Serializable {
     private long idcontrato;
 
     @Column(name = "reg_billetera")
-    private String reg_billetera;
+    private String registro_billetera;
 
     @Column(name = "monto_total")
     private BigDecimal monto_total;
@@ -48,5 +48,12 @@ public class ContractEntity implements Serializable {
     public boolean isNew() {
         return idcontrato == 0;
     }
+
+    @JsonIgnore
+    @Transient
+    public static ContractEntity build(String registro_billetera,BigDecimal monto_total, BigDecimal cuota, boolean estado_contrato,String nombre_contrato,PersonEntity personEntity) {
+        return ContractEntity.builder().registro_billetera(registro_billetera).monto_total(monto_total).cuota(cuota).estado_contrato(estado_contrato).nombre_contrato(nombre_contrato).personEntity.(personEntity).build();
+    }
+
 
 }

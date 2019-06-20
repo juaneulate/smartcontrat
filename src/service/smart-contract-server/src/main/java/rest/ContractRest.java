@@ -1,12 +1,18 @@
 
 package rest;
 
+import com.google.gson.reflect.TypeToken;
+import dao.ContractDao;
 import dao.LoginDao;
+import dto.ContractDto;
+import dto.PersonLoginDto;
 import entity.ContractEntity;
+import entity.LoginEntity;
 import entity.PersonEntity;
 import lombok.extern.jbosslog.JBossLog;
 import rest.configuration.path.RestPath;
 import service.ContractService;
+import utils.JsonUtil;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -27,7 +33,7 @@ public class ContractRest implements Serializable {
     private ContractService contractService;
 
     @Inject
-    private LoginDao loginDao;
+    private ContractDao contractDao;
 
     @GET
     @Path(RestPath.LIST)
@@ -60,6 +66,30 @@ public class ContractRest implements Serializable {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
+    @POST
+    @Path(RestPath.LIST)
+    public Response resContractSave(String jsonBody) {
+        try {
+            //log.info("testingPostService" + jsonBody);
+            System.out.println("jsonPropietary: "+jsonBody);
+            ContractEntity contractEntity = getContractEntity(jsonBody);
+            contractDao.persist(contractEntity);
+            return Response.ok(true).build();
+        } catch (Exception e) {
+            // log.error(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
+    public ContractEntity getContractEntity(String jsonBody) {
+        TypeToken<ContractDto> typeToken = new TypeToken<ContractDto>() {};
+        ContractDto contractDto = JsonUtil.fromJson(jsonBody, typeToken);
+        ContractEntity contractEntity = ContractEntity.build(contractDto.getRegistroBilletera(),contractDto.getMontoTotal(),contractDto.getCuota(),contractDto.isEstadoContrato(),contractDto.getNombreContrato());
+        return ContractEntity.build(contractDto.getRegistroBilletera(),contractDto.getCuota(),contractDto.getCuota(),contractDto.isEstadoContrato(),contractDto.getNombreContrato(),contractEntity);
+    }
+
+
+
 
 }
 

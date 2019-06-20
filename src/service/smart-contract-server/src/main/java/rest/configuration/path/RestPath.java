@@ -26,10 +26,10 @@ public final class RestPath {
     public static final String TEST_POST = "testing-post-service";
     public static final String TEST_POST_WITH_DTO = "testing-post-with-dto";
     public static final String TEST_PUT = "test-put-service";
-    public static final String TEST_POST_PROPIETARY_SAVE = "propietary-save";
-    public static final String TEST_POST_ARRENDETARY_SAVE = "arrendatary-save";
-    public static final String TEST_GET_PROPIETARY = "get-propietary";
-    public static final String TEST_GET_ARRENDETARY = "get-arrendatary";
+    public static final String TEST_POST_OWNER_SAVE = "owner-save";
+    public static final String TEST_POST_TENANT_SAVE = "tenant-save";
+    public static final String TEST_GET_OWNER = "get-owner";
+    public static final String TEST_GET_TENANT = "get-tenant";
 
     //endregion
 
@@ -37,7 +37,7 @@ public final class RestPath {
 
     public static final String LIST = "list";
     public static final String LIST_OWNER = "list-owner";
-    public static final String LIST_ARRENDATARY = "list-arrendatary";
+    public static final String LIST_TENANT = "list-tenant";
     public static final String CREATE = "create";
     public static final String CONFIRM = "confirm";
     public static final String REGISTER = "register";
