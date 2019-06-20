@@ -28,4 +28,16 @@ export class ArrendatarioService {
 
     }
 
+    get(username: string) {
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+
+        const body = {
+            username
+        };
+
+        return this.http.post<boolean>(this.baseUrl + 'arrendatary-save', body, {headers});
+
+    }
+
 }

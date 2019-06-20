@@ -27,4 +27,16 @@ export class PropietarioService {
         return this.http.post<boolean>(this.baseUrl + 'propietary-save', body, {headers});
 
     }
+
+    get(username: string) {
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+
+        const body = {
+            username
+        };
+
+        return this.http.post<boolean>(this.baseUrl + 'propietary-get', body, {headers});
+
+    }
 }

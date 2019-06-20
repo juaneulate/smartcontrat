@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {PersonModel} from '../../models/person.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class LoginService {
+export class PersonService {
 
     constructor(
         private http: HttpClient
@@ -13,18 +14,14 @@ export class LoginService {
 
     baseUrl = 'http://52.15.237.224:8080/rest/user/';
 
-    login(login: string, password: string) {
+    get(login: string) {
         // Initialize Params Object
         let params = new HttpParams();
         params = params.append('login', login);
-        params = params.append('password', password);
 
-        return this.http.get<boolean>(this.baseUrl + 'login', {params});
-    }
+        console.log('previos call');
 
-    logout() {
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('token');
-        return null;
+        return this.http.get<PersonModel>(this.baseUrl + 'get-person', {params});
+
     }
 }

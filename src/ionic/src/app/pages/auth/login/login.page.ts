@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginService} from '../../../services/login/login.service';
-import {AlertController} from '@ionic/angular';
+import {ErrorService} from '../../../services/error/error.service';
+import {AlertService} from '../../../services/alert/alert.service';
 
 @Component({
     selector: 'app-login',
@@ -13,10 +14,11 @@ export class LoginPage implements OnInit {
 
     constructor(
         private authenticationService: LoginService,
+        private errorService: ErrorService,
+        private alertService: AlertService,
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private alertCtrl: AlertController
     ) {
         this.loginForm = this.formBuilder.group({
             username: new FormControl('', {validators: Validators.required}),
@@ -43,24 +45,6 @@ export class LoginPage implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
     }
 
-    async presentConfirm(message, error = null) {
-
-        if (error != null) {
-            message += ' ' + error;
-        }
-
-        const alert = await this.alertCtrl.create({
-            header: 'Panic!!',
-            message,
-            buttons: [{
-                text: 'OK',
-                handler: () => {
-                    console.log('OK clicked');
-                }
-            }]
-        });
-        alert.present();
-    }
 
     onLogin() {
 
@@ -82,17 +66,17 @@ export class LoginPage implements OnInit {
                         console.log('Login successful');
                         localStorage.setItem('isLoggedIn', 'true');
                         localStorage.setItem('token', this.f.username.value);
-                        return this.router.navigate([this.returnUrl]);
+                        return this.router.navigate([this.returnUrl],);
                     } else {
                         console.log('service auth is not ok.');
-                        this.presentConfirm('Usuario o contraseña invalida');
+                        this.alertService.presentConfirm('Usuario o contraseña invalida');
                         this.loading = false;
                     }
                 },
                 error => {
                     this.loading = false;
-                    this.presentConfirm(error.message, error.error);
-                    console.log(error);
+                    this.errorService.alertError(error);
+                    this.errorService.consoleLog(error);
                 }
             );
     }

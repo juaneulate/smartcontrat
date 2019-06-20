@@ -3,6 +3,8 @@ import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {PropietarioService} from '../../../services/propietario/propietario.service';
 import {AlertController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {ErrorService} from '../../../services/error/error.service';
+import {AlertService} from '../../../services/alert/alert.service';
 
 @Component({
     selector: 'app-propietario',
@@ -19,6 +21,8 @@ export class PropietarioPage implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
+        private errorService: ErrorService,
+        private alertService: AlertService,
         private propietarioService: PropietarioService,
         private alertCtrl: AlertController,
         private router: Router
@@ -62,33 +66,16 @@ export class PropietarioPage implements OnInit {
                 if (this.isOk) {
                     return this.router.navigate([this.returnUrl]);
                 } else {
-                    this.message('Error al guardar usuario');
+                    this.alertService.presentConfirm('Error al guardar usuario');
                 }
             },
             error => {
                 console.log(error);
-                this.message(error.message);
-
+                this.errorService.alertError(error);
+                this.errorService.consoleLog(error);
             }
         );
     }
 
-    async message(message, error = null) {
 
-        if (error != null) {
-            message += ' ' + error;
-        }
-
-        const alert = await this.alertCtrl.create({
-            header: 'Panic!!',
-            message,
-            buttons: [{
-                text: 'OK',
-                handler: () => {
-                    console.log('OK clicked');
-                }
-            }]
-        });
-        alert.present();
-    }
 }
