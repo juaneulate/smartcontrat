@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LoginService} from '../../../services/login/login.service';
 import {ErrorService} from '../../../services/error/error.service';
 import {AlertService} from '../../../services/alert/alert.service';
+import {NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginPage implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
+        private navCtrl: NavController,
     ) {
         this.loginForm = this.formBuilder.group({
             username: new FormControl('', {validators: Validators.required}),
@@ -68,8 +70,7 @@ export class LoginPage implements OnInit {
                     console.log('Login successful');
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem('token', this.f.username.value);
-
-                    return this.router.navigate([this.returnUrl]);
+                    this.navCtrl.navigateRoot(this.returnUrl);
                 } else {
                     console.log('service auth is not ok.');
                     this.alertService.presentConfirm('Usuario o contraseña invalida');

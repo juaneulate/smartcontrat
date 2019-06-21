@@ -5,7 +5,7 @@ import {IonicModule} from '@ionic/angular';
 import {RouterModule} from '@angular/router';
 
 import {HomePage} from './home.page';
-import {ResultListComponent} from '../../components/contract/resultList/resultList.component';
+import {ResultListComponent} from '../../../components/contract/resultList/resultList.component';
 
 @NgModule({
     imports: [
