@@ -24,7 +24,7 @@ public class PersonEntity implements Serializable {
     private long personId;
 
     @Column(name = "nombrecompleto", nullable = false)
-    private String lastName;
+    private String fullName;
 
     @Column(name = "edad", nullable = false)
     private int age;
@@ -38,8 +38,8 @@ public class PersonEntity implements Serializable {
 
     @JsonIgnore
     @Transient
-    public static PersonEntity build(String lastName, int age, boolean personType) {
-        return PersonEntity.builder().lastName(lastName).age(age).personType(personType).build();
+    public static PersonEntity build(String fullName, int age, boolean personType) {
+        return PersonEntity.builder().fullName(fullName).age(age).personType(personType).build();
     }
 
 

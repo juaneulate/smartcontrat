@@ -1,7 +1,6 @@
 package rest;
 
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import dao.PersonDao;
 import dto.PersonLoginDto;
@@ -32,15 +31,12 @@ public class PersonRest implements Serializable {
 
 
     @POST
-    @Path(RestPath.TEST_POST_PROPIETARY_SAVE)
-    public Response savePropietary(String jsonBody) {
+    @Path(RestPath.TEST_POST_OWNER_SAVE)
+    public Response saveOwner(String jsonBody) {
         try {
             //log.info("testingPostService" + jsonBody);
             System.out.println("jsonPropietary: "+jsonBody);
-            TypeToken<PersonLoginDto> typeToken= new TypeToken<PersonLoginDto>(){};
-            PersonLoginDto personLoginDto= JsonUtil.fromJson(jsonBody,typeToken);
-            PersonEntity personEntity = PersonEntity.build(personLoginDto.getLastname(),personLoginDto.getAge(),true);
-            LoginEntity loginEntity = LoginEntity.build(personLoginDto.getLogin(),personLoginDto.getPassword(),personEntity);
+            LoginEntity loginEntity = getLoginEntity(jsonBody, true);
             personDao.persist(loginEntity);
             return Response.ok(true).build();
         } catch (Exception e) {
@@ -50,21 +46,25 @@ public class PersonRest implements Serializable {
     }
 
     @POST
-    @Path(RestPath.TEST_POST_ARRENDETARY_SAVE)
-    public Response saveArrendatary(String jsonBody) {
+    @Path(RestPath.TEST_POST_TENANT_SAVE)
+    public Response saveTenant(String jsonBody) {
         try {
           //  log.info("testingPostService" + jsonBody);
-            System.out.println("jsonArrendatary: "+jsonBody);
-            TypeToken<PersonEntity> typeToken= new TypeToken<PersonEntity>(){};
-            PersonEntity personPropietary= JsonUtil.fromJson(jsonBody,typeToken);
-            System.out.println(personPropietary);
-            personPropietary.setPersonType(false);
-            personDao.persist(personPropietary);
+            LoginEntity loginEntity = getLoginEntity(jsonBody, false);
+            personDao.persist(loginEntity);
             return Response.ok(true).build();
         } catch (Exception e) {
           //  log.error(e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
+    }
+
+    public LoginEntity getLoginEntity(String jsonBody, boolean b) {
+        TypeToken<PersonLoginDto> typeToken = new TypeToken<PersonLoginDto>() {
+        };
+        PersonLoginDto personLoginDto = JsonUtil.fromJson(jsonBody, typeToken);
+        PersonEntity personEntity = PersonEntity.build(personLoginDto.getLastname(), personLoginDto.getAge(), b);
+        return LoginEntity.build(personLoginDto.getLogin(), personLoginDto.getPassword(), personEntity);
     }
 
     @GET
@@ -97,8 +97,8 @@ public class PersonRest implements Serializable {
 
 
     @GET
-    @Path(RestPath.LIST_ARRENDATARY)
-    public Response getArrendataryList() {
+    @Path(RestPath.LIST_TENANT)
+    public Response getTenantList() {
         try {
           //  log.info("testingPostService" + jsonBody);
             System.out.println("jsonArrendatary: ");

@@ -14,19 +14,19 @@ import javax.ws.rs.core.Response;
 import java.io.Serializable;
 import java.util.Optional;
 
-@Path(RestPath.REST_USER)
+@Path(RestPath.REST_LOGIN)
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 @JBossLog
-public class UserRest implements Serializable {
+public class LoginRest implements Serializable {
 
 
     @Inject
     private LoginDao loginDao;
 
     @GET
-    @Path(RestPath.LOGIN)
-    public Response restValidateLogin(@QueryParam(RestPath.LOGIN) String login,
+    @Path(RestPath.VALIDATE)
+    public Response restValidateLogin(@QueryParam(RestPath.USERNAME) String login,
                                       @QueryParam(RestPath.PASSWORD) String password) {
         try {
             //       log.info("restValidateLogin");
@@ -41,7 +41,7 @@ public class UserRest implements Serializable {
 
     @GET
     @Path(RestPath.GET_PERSON)
-    public Response getPersonByUserName(@QueryParam(RestPath.LOGIN) String login) {
+    public Response getPersonByUserName(@QueryParam(RestPath.USERNAME) String login) {
         try {
             //       log.info("restValidateLogin");
             Optional<PersonEntity> personOpt = loginDao.getPersonByUserName(login);

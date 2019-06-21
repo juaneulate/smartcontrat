@@ -14,7 +14,7 @@ public class BaseDaoImpl implements Serializable {
         em.persist(entity);
         return entity;
     }
-
+    @Transactional
     public <T> T merge(T entity) {
         entity = em.merge(entity);
         return entity;
