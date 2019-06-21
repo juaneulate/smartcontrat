@@ -56,17 +56,4 @@ public class ContractEntity implements Serializable {
                                        BigDecimal cuota, boolean estadoContrato,String nombreContrato,PersonEntity personEntity) {
         return ContractEntity.builder().registroBilletera(registroBilletera).montoTotal(montoTotal).cuota(cuota).estadoContrato(estadoContrato).nombreContrato(nombreContrato).personEntity(personEntity).build();
     }
-
- /*   public ContractEntity(String registroBilletera,BigDecimal montoTotal,
-                                 BigDecimal cuota, boolean estadoContrato,String nombreContrato,PersonEntity personEntity){
-
-        this.registroBilletera=registroBilletera;
-        this.montoTotal=montoTotal;
-        this.cuota=cuota;
-        this.estadoContrato=estadoContrato;
-        this.nombreContrato=nombreContrato;
-        this.personEntity=personEntity;
-
-
-    }*/
 }

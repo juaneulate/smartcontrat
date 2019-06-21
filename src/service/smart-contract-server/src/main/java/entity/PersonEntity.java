@@ -32,16 +32,11 @@ public class PersonEntity implements Serializable {
     @Column(name = "tipopersona", nullable = false)
     private boolean personType;
 
-   /* @OneToOne(fetch=FetchType.LAZY, mappedBy="personEntity")
-    private LoginEntity loginEntity;*/
-
-
     @JsonIgnore
     @Transient
     public static PersonEntity build(String fullName, int age, boolean personType) {
         return PersonEntity.builder().fullName(fullName).age(age).personType(personType).build();
     }
-
 
     @JsonIgnore
     @Transient
@@ -49,4 +44,11 @@ public class PersonEntity implements Serializable {
         return personId == 0;
     }
 
+    public long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(long personId) {
+        this.personId = personId;
+    }
 }
