@@ -59,22 +59,20 @@ export class PropietarioPage implements OnInit {
         const username = this.f.username.value;
         const password = this.f.password.value;
 
-        this.propietarioService.save(lastname, age, username, password).subscribe(
-            data => {
-                this.isOk = data;
-
+        this.propietarioService.save(lastname, age, username, password)
+            .then(data => {
+                this.isOk = data.data;
                 if (this.isOk) {
                     return this.router.navigate([this.returnUrl]);
                 } else {
                     this.alertService.presentConfirm('Error al guardar usuario');
                 }
-            },
-            error => {
+            })
+            .catch(error => {
                 console.log(error);
                 this.errorService.alertError(error);
                 this.errorService.consoleLog(error);
-            }
-        );
+            });
     }
 
 

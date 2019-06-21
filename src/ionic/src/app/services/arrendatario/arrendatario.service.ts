@@ -1,21 +1,23 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HTTP} from '@ionic-native/http/ngx';
+import {BaseService} from '../base/base.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ArrendatarioService {
+export class ArrendatarioService extends BaseService {
 
     constructor(
-        private http: HttpClient
+        private http: HTTP
     ) {
+        super();
+        this.controllerUrl = 'person/';
     }
 
-    baseUrl = 'http://52.15.237.224:8080/rest/person/';
-
     save(lastName: string, age: number, username: string, password: string) {
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
+        const headers = {
+            ContentType: 'application/json'
+        };
 
         const body = {
             lastName,
@@ -24,20 +26,6 @@ export class ArrendatarioService {
             password
         };
 
-        return this.http.post<boolean>(this.baseUrl + 'arrendatary-save', body, {headers});
-
+        return this.http.post(this.getFullUrl() + 'tenant-save', body, {headers});
     }
-
-    get(username: string) {
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-
-        const body = {
-            username
-        };
-
-        return this.http.post<boolean>(this.baseUrl + 'arrendatary-save', body, {headers});
-
-    }
-
 }

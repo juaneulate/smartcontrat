@@ -1,0 +1,9 @@
+<ion-list>
+    <ion-item *ngFor="let result of results">
+        <ion-label>
+            <h2 text-uppercase>Nombre: {{result.nombreContrato}}</h2>
+            <h3>Cuota: {{result.cuota}}</h3>
+            <p>Monto total: {{result.montoTotal}}</p>
+        </ion-label>
+    </ion-item>
+</ion-list>

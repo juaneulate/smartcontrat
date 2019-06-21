@@ -1,8 +1,8 @@
-export interface ContractModel {
+export class ContractModel {
     cuota: number;
-    estado_contrato: boolean;
+    estadoContrato: boolean;
     idcontrato: number;
-    monto_total: number;
-    nombre_contrato: string;
-    reg_billetera: string;
+    montoTotal: number;
+    nombreContrato: string;
+    regBilletera: string;
 }

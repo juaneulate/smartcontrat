@@ -1,25 +1,25 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {ContractModel} from '../../models/contract.model';
+import {HTTP} from '@ionic-native/http/ngx';
+import {BaseService} from '../base/base.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ContractsService {
+export class ContractsService extends BaseService {
 
     constructor(
-        private http: HttpClient
+        private http: HTTP
     ) {
+        super();
+        this.controllerUrl = 'contract/';
     }
 
-    baseUrl = 'http://52.15.237.224:8080/rest/contract/';
-
-
-    list(login: string) {
+    list(username: string) {
         // Initialize Params Object
-        let params = new HttpParams();
-        params = params.append('login', login);
+        const params = {
+            username
+        };
 
-        return this.http.get<ContractModel[]>(this.baseUrl + 'list', {params});
+        return this.http.get(this.getFullUrl() + 'list', params, {});
     }
 }

@@ -1,25 +1,27 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HTTP} from '@ionic-native/http/ngx';
+import {BaseService} from '../base/base.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class LoginService {
+export class LoginService extends BaseService {
 
     constructor(
-        private http: HttpClient
+        private http: HTTP
     ) {
+        super();
+        this.controllerUrl = 'login/';
     }
 
-    baseUrl = 'http://52.15.237.224:8080/rest/user/';
 
-    login(login: string, password: string) {
+    login(username: string, password: string) {
         // Initialize Params Object
-        let params = new HttpParams();
-        params = params.append('login', login);
-        params = params.append('password', password);
-
-        return this.http.get<boolean>(this.baseUrl + 'login', {params});
+        const params = {
+            username,
+            password
+        };
+        return this.http.get(this.getFullUrl() + 'validate', params, {});
     }
 
     logout() {

@@ -5,6 +5,7 @@ import {IonicModule} from '@ionic/angular';
 import {RouterModule} from '@angular/router';
 
 import {HomePage} from './home.page';
+import {ResultListComponent} from '../../components/contract/resultList/resultList.component';
 
 @NgModule({
     imports: [
@@ -16,7 +17,7 @@ import {HomePage} from './home.page';
         ]),
         ReactiveFormsModule
     ],
-    declarations: [HomePage]
+    declarations: [HomePage, ResultListComponent]
 })
 export class HomePageModule {
 }

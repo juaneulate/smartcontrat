@@ -10,15 +10,17 @@
     <ion-toolbar color="primary">
         <!-- Animated Searchbar -->
         <ion-searchbar
-                (ionFocus)="onInput()"
+                (ionChange)="onChange()"
+                debounce="700"
                 [formControl]="searchControl"
                 placeholder="Buscar"
+                [value]="searchText"
                 animated>
         </ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-
+    <app-resultList [searchText]="[searchText]" *ngIf="showResults">
+    </app-resultList>
 </ion-content>

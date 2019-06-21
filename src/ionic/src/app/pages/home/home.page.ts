@@ -3,8 +3,7 @@ import {PersonService} from '../../services/person/person.service';
 import {ErrorService} from '../../services/error/error.service';
 import {AlertService} from '../../services/alert/alert.service';
 import {FormControl} from '@angular/forms';
-import {ContractsService} from '../../services/contracts/contracts.service';
-import {ContractModel} from '../../models/contract.model';
+import {Platform} from '@ionic/angular';
 
 @Component({
     selector: 'app-home',
@@ -14,49 +13,51 @@ import {ContractModel} from '../../models/contract.model';
 export class HomePage implements OnInit {
     username: string;
     searchControl: FormControl;
-    showResults = true;
-    result: ContractModel[];
+    showResults = false;
+    searchText: any;
 
     constructor(
         private personService: PersonService,
         private errorService: ErrorService,
-        private contractService: ContractsService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private platform: Platform
     ) {
         this.username = localStorage.getItem('token');
+        console.log(this.username);
     }
 
     ngOnInit() {
         this.searchControl = new FormControl();
-        this.personService.get(this.username).subscribe(
-            data => {
-                console.log(data);
-                localStorage.setItem('fullname', data.lastname);
-                localStorage.setItem('age', data.age.toString());
-                if (data.tipoPersona) {
-                    localStorage.setItem('type', 'owner');
-                } else {
-                    localStorage.setItem('type', 'lessee');
-                }
+        this.platform.ready().then(dataP => {
+            console.log(dataP);
+            this.personService.get(this.username)
+                .then(data => {
+                    console.log(data);
 
-            },
-            error => {
-                this.errorService.consoleLog(error);
-                this.errorService.alertError(error);
-            }
-        );
+                    localStorage.setItem('fullname', data.data['lastname']);
+                    localStorage.setItem('age', data.data['age']);
+
+                    if (data.data['tipoPersona']) {
+                        localStorage.setItem('type', 'owner');
+                    } else {
+                        localStorage.setItem('type', 'tenant');
+                    }
+                })
+                .catch(error => {
+                    this.errorService.consoleLog(error);
+                    this.errorService.alertError(error);
+                });
+        });
     }
 
-    onInput() {
+    onChange() {
         const login = this.searchControl.value;
-        this.contractService.list(login).subscribe(
-            data => {
-                console.log(data);
-                this.result = data;
-            },
-            error => {
-                this.errorService.alertError(error);
-            }
-        );
+        console.log(login);
+        if (login != null) {
+            this.searchText = login;
+            this.showResults = true;
+        } else {
+            this.showResults = false;
+        }
     }
 }

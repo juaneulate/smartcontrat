@@ -59,26 +59,28 @@ export class LoginPage implements OnInit {
         const password = this.f.password.value;
 
         this.authenticationService.login(username, password)
-            .subscribe(
-                data => {
-                    this.isAuth = data;
-                    if (this.isAuth) {
-                        console.log('Login successful');
-                        localStorage.setItem('isLoggedIn', 'true');
-                        localStorage.setItem('token', this.f.username.value);
-                        return this.router.navigate([this.returnUrl],);
-                    } else {
-                        console.log('service auth is not ok.');
-                        this.alertService.presentConfirm('Usuario o contraseña invalida');
-                        this.loading = false;
-                    }
-                },
-                error => {
-                    this.loading = false;
-                    this.errorService.alertError(error);
-                    this.errorService.consoleLog(error);
+            .then(data => {
+                console.log(data.data);
+                this.isAuth = JSON.parse(data.data);
+                console.log(this.isAuth);
+
+                if (this.isAuth) {
+                    console.log('Login successful');
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('token', this.f.username.value);
+
+                    return this.router.navigate([this.returnUrl]);
+                } else {
+                    console.log('service auth is not ok.');
+                    this.alertService.presentConfirm('Usuario o contraseña invalida');
                 }
-            );
+                this.loading = false;
+            })
+            .catch(error => {
+                this.loading = false;
+                this.errorService.alertError(error);
+                this.errorService.consoleLog(error);
+            });
     }
 
 }

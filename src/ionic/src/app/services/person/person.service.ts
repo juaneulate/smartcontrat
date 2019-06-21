@@ -1,27 +1,26 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {PersonModel} from '../../models/person.model';
+import {BaseService} from '../base/base.service';
+import {HTTP} from '@ionic-native/http/ngx';
 
 @Injectable({
     providedIn: 'root'
 })
-export class PersonService {
+export class PersonService extends BaseService {
 
     constructor(
-        private http: HttpClient
+        private http: HTTP
     ) {
+        super();
+        this.controllerUrl = 'login/';
     }
 
-    baseUrl = 'http://52.15.237.224:8080/rest/user/';
-
-    get(login: string) {
+    get(username: string) {
         // Initialize Params Object
-        let params = new HttpParams();
-        params = params.append('login', login);
+        const params = {
+            username
+        };
 
-        console.log('previos call');
-
-        return this.http.get<PersonModel>(this.baseUrl + 'get-person', {params});
+        return this.http.get(this.getFullUrl() + 'get-person', params, {});
 
     }
 }
