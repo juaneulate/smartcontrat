@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Platform} from '@ionic/angular';
-import {PersonService} from '../../../services/person/person.service';
-import {ErrorService} from '../../../services/error/error.service';
+import { Component, OnInit } from '@angular/core';
+import { Platform, NavController } from '@ionic/angular';
+import { PersonService } from '../../../services/person/person.service';
+import { ErrorService } from '../../../services/error/error.service';
 
 @Component({
     selector: 'app-base',
@@ -11,14 +11,14 @@ import {ErrorService} from '../../../services/error/error.service';
 export class BasePage implements OnInit {
 
     public pagesOwner = [
-        {title: 'Home', url: '/main/home', icon: 'home'},
-        {title: 'List', url: '/main/list', icon: 'list'},
-        {title: 'Crear Contrato', url: '/contract/create', icon: 'list-box'}
+        { title: 'Home', url: '/base/main/home', icon: 'home' },
+        { title: 'List', url: '/base/main/list', icon: 'list' },
+        { title: 'Crear Contrato', url: '/base/main/contract/create', icon: 'list-box' }
     ];
 
     public pagesTenant = [
-        {title: 'Home', url: 'home', icon: 'home'},
-        {title: 'List', url: 'list', icon: 'list'},
+        { title: 'Home', url: '/base/main/home', icon: 'home' },
+        { title: 'List', url: '/base/main/list', icon: 'list' },
     ];
 
     showOwner: boolean;
@@ -26,15 +26,20 @@ export class BasePage implements OnInit {
     username: string;
 
     constructor(
-        private  personService: PersonService,
-        private  errorService: ErrorService,
-        private platform: Platform
+        private personService: PersonService,
+        private errorService: ErrorService,
+        private platform: Platform,
+        private navCtrl: NavController
     ) {
         this.username = localStorage.getItem('token');
         console.log(this.username);
     }
 
     ngOnInit() {
+    }
+
+    move(url) {
+        this.navCtrl.navigateRoot(url);
     }
 
     ionViewDidEnter() {

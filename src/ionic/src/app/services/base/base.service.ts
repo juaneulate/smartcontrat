@@ -6,7 +6,7 @@ import {Injectable} from '@angular/core';
 export class BaseService {
 
     constructor() {
-        this.baseUrl = 'http://52.15.237.224:8080/rest/';
+        this.baseUrl = 'http://52.14.41.220:8080/rest/';
     }
 
     protected baseUrl: string;

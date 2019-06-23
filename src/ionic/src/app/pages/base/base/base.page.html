@@ -8,19 +8,18 @@
         <ion-content>
             <ion-list>
                 <div *ngIf="showOwner">
-                    <ion-menu-toggle *ngFor="let p of pagesOwner">
-                        <ion-item routerDirection="root" [routerLink]="[p.url]">
-                            <ion-icon slot="start" [name]="p.icon"></ion-icon>
-                            <ion-label>{{p.title}}</ion-label>
+                    <ion-menu-toggle *ngFor="let page of pagesOwner">
+                        <ion-item (click)="move(page.url)">
+                            <ion-icon slot="start" [name]="page.icon"></ion-icon>
+                            <ion-label>{{page.title}}</ion-label>
                         </ion-item>
                     </ion-menu-toggle>
                 </div>
-
                 <div *ngIf="showTenant">
-                    <ion-menu-toggle *ngFor="let p of pagesTenant">
-                        <ion-item routerDirection="root" [routerLink]="[p.url]">
-                            <ion-icon slot="start" [name]="p.icon"></ion-icon>
-                            <ion-label>{{p.title}}</ion-label>
+                    <ion-menu-toggle *ngFor="let page of pagesTenant">
+                        <ion-item (click)="move(page.url)">
+                            <ion-icon slot="start" [name]="page.icon"></ion-icon>
+                            <ion-label>{{page.title}}</ion-label>
                         </ion-item>
                     </ion-menu-toggle>
                 </div>

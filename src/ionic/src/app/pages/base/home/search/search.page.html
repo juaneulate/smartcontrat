@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Home</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+      <!-- Animated Searchbar -->
+      <ion-searchbar
+              (ionChange)="onChange()"
+              debounce="700"
+              [formControl]="searchControl"
+              placeholder="Buscar"
+              [value]="searchText"
+              animated>
+      </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-resultList [results]="results" *ngIf="showResults">
+  </app-resultList>
+</ion-content>
