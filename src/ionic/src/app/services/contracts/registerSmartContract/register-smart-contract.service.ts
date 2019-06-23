@@ -108,7 +108,7 @@ export class RegisterSmartContractService {
       // const auxJsonContract = JSON.parse(jsonContract);
       this.contract = localJson.at(hashContract);
       console.log(this.contract);
-      const aux = this.contract.Z();
+      const aux = this.contract.getInstructor();
       console.log(aux);
 
       const edad = 28;
