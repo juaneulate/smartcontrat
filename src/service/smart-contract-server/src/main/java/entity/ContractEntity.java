@@ -40,9 +40,19 @@ public class ContractEntity implements Serializable {
     @Column(name = "nombre_contrato")
     private String nombreContrato;
 
+    @Column(name = "hash_contract")
+    private String hashContract;
+
+    @Column(name = "json_contract")
+    private String jsonContract;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "idpersona")
     private PersonEntity personEntity;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "idtenant")
+    private PersonEntity tenantEntity;
 
     @JsonIgnore
     @Transient
@@ -52,8 +62,17 @@ public class ContractEntity implements Serializable {
 
     @JsonIgnore
     @Transient
-    public static ContractEntity build(String registroBilletera,BigDecimal montoTotal,
-                                       BigDecimal cuota, boolean estadoContrato,String nombreContrato,PersonEntity personEntity) {
-        return ContractEntity.builder().registroBilletera(registroBilletera).montoTotal(montoTotal).cuota(cuota).estadoContrato(estadoContrato).nombreContrato(nombreContrato).personEntity(personEntity).build();
+    public static ContractEntity build(String registroBilletera, BigDecimal montoTotal, BigDecimal cuota,
+                                       boolean estadoContrato, String nombreContrato, String jsonContract, String hashContract, PersonEntity personEntity) {
+        return ContractEntity.builder().
+                registroBilletera(registroBilletera).
+                montoTotal(montoTotal).
+                cuota(cuota).
+                estadoContrato(estadoContrato).
+                nombreContrato(nombreContrato).
+                jsonContract(jsonContract).
+                hashContract(hashContract).
+                personEntity(personEntity).
+                build();
     }
 }

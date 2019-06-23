@@ -19,6 +19,8 @@ public class ContractDto {
     private BigDecimal cuota;
     private boolean estadoContrato;
     private String nombreContrato;
+    private String hashContract;
+    private String jsonContract;
     private String username;
 
     public String getUsername() {
@@ -67,5 +69,21 @@ public class ContractDto {
 
     public void setNombreContrato(String nombreContrato) {
         this.nombreContrato = nombreContrato;
+    }
+
+    public String getHashContract() {
+        return hashContract;
+    }
+
+    public void setHashContract(String hashContract) {
+        this.hashContract = hashContract;
+    }
+
+    public String getJsonContract() {
+        return jsonContract;
+    }
+
+    public void setJsonContract(String jsonContract) {
+        this.jsonContract = jsonContract;
     }
 }

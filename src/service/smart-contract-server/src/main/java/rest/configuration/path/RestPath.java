@@ -60,6 +60,8 @@ public final class RestPath {
 
     public static final String AGE = "age";
     public static final String GET_PERSON = "get-person";
+    public static final String GET_CONTRACT = "get-contract";
+    public static final String CONTRACT_ID = "contract_id";
 
 
 

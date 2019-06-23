@@ -34,7 +34,7 @@ public class ContractRest implements Serializable {
     private ContractDao contractDao;
 
     @Inject
-    private  LoginDao loginDao;
+    private LoginDao loginDao;
 
     @GET
     @Path(RestPath.LIST)
@@ -67,12 +67,30 @@ public class ContractRest implements Serializable {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
+
+    @GET
+    @Path(RestPath.GET_CONTRACT)
+    public Response restGetContract(@QueryParam(RestPath.CONTRACT_ID) long contract_id) {
+        try {
+            // log.info("restContractList");
+            Optional<ContractEntity> contractByIdOpt = contractDao.getById(contract_id);
+            if (contractByIdOpt.isPresent()) {
+                return Response.ok(contractByIdOpt.get()).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+        } catch (Exception e) {
+//           log.error(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+    }
+
     @POST
     @Path(RestPath.SAVE)
     public Response resContractSave(String jsonBody) {
         try {
             //log.info("testingPostService" + jsonBody);
-            System.out.println("jsonPropietary: "+jsonBody);
+            System.out.println("jsonPropietary: " + jsonBody);
             ContractEntity contractEntity = getContractEntity(jsonBody);
             System.out.println(contractEntity);
             contractDao.merge(contractEntity);
@@ -86,13 +104,11 @@ public class ContractRest implements Serializable {
     private ContractEntity getContractEntity(String jsonBody) {
         TypeToken<ContractDto> typeToken = new TypeToken<ContractDto>() {};
         ContractDto contractDto = JsonUtil.fromJson(jsonBody, typeToken);
-        PersonEntity personEntity= loginDao.getPersonByUserName(contractDto.getUsername()).get();
+        PersonEntity personEntity = loginDao.getPersonByUserName(contractDto.getUsername()).get();
         System.out.println(personEntity);
-       /* ContractEntity contractEntity = ContractEntity.build(contractDto.getRegistroBilletera(),contractDto.getMontoTotal(),contractDto.getCuota(),contractDto.isEstadoContrato(),contractDto.getNombreContrato(),personEntity);*/
-        return ContractEntity.build(contractDto.getRegistroBilletera(),contractDto.getCuota(),contractDto.getCuota(),contractDto.isEstadoContrato(),contractDto.getNombreContrato(),personEntity);
+        /* ContractEntity contractEntity = ContractEntity.build(contractDto.getRegistroBilletera(),contractDto.getMontoTotal(),contractDto.getCuota(),contractDto.isEstadoContrato(),contractDto.getNombreContrato(),personEntity);*/
+        return ContractEntity.build(contractDto.getRegistroBilletera(), contractDto.getCuota(), contractDto.getCuota(), contractDto.isEstadoContrato(), contractDto.getNombreContrato(), contractDto.getJsonContract(), contractDto.getHashContract(), personEntity);
     }
-
-
 
 
 }
