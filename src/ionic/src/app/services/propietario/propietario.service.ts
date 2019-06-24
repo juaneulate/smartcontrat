@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {BaseService} from '../base/base.service';
-import {HTTP} from '@ionic-native/http/ngx';
+import { Injectable } from '@angular/core';
+import { BaseService } from '../base/base.service';
+import { HTTP } from '@ionic-native/http/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -15,18 +15,19 @@ export class PropietarioService extends BaseService {
     }
 
 
-    save(lastName: string, age: number, username: string, password: string) {
+    save(fullName: string, age: number, login: string, password: string) {
         const headers = {
-            ContentType: 'application/json'
+            'Content-Type': 'application/json'
         };
 
         const body = {
-            lastName,
+            fullName,
             age,
-            username,
+            login,
             password
         };
 
-        return this.http.post(this.getFullUrl() + 'owner-save', body, {headers});
+        this.http.setDataSerializer('json');
+        return this.http.post(this.getFullUrl() + 'owner-save', body, headers);
     }
 }

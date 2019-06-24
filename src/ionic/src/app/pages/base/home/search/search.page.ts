@@ -25,7 +25,7 @@ export class SearchPage implements OnInit {
 
   ngOnInit() {
     this.searchControl = new FormControl();
-    this.searchText = 'juancho';
+    this.searchText = '';
   }
 
   onChange() {

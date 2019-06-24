@@ -5,4 +5,6 @@ export class ContractModel {
     montoTotal: number;
     nombreContrato: string;
     regBilletera: string;
+    jsonContract: string;
+    hashContract: string;
 }
