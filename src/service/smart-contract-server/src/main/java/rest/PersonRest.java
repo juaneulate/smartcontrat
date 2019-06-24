@@ -59,7 +59,7 @@ public class PersonRest implements Serializable {
         }
     }
 
-    public LoginEntity getLoginEntity(String jsonBody, boolean b) {
+    private LoginEntity getLoginEntity(String jsonBody, boolean b) {
         TypeToken<PersonLoginDto> typeToken = new TypeToken<PersonLoginDto>() {
         };
         PersonLoginDto personLoginDto = JsonUtil.fromJson(jsonBody, typeToken);
