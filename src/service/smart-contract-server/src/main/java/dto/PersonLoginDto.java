@@ -11,18 +11,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PersonLoginDto {
 
-    private String lastname;
+    private String fullName;
     private int age;
     private String login;
     private String password;
 
-
-    public String getLastname() {
-        return lastname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public int getAge() {

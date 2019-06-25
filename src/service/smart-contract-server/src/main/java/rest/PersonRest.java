@@ -34,8 +34,7 @@ public class PersonRest implements Serializable {
     @Path(RestPath.TEST_POST_OWNER_SAVE)
     public Response saveOwner(String jsonBody) {
         try {
-            //log.info("testingPostService" + jsonBody);
-            System.out.println("jsonPropietary: "+jsonBody);
+            log.info("testingPostService" + jsonBody);
             LoginEntity loginEntity = getLoginEntity(jsonBody, true);
             personDao.persist(loginEntity);
             return Response.ok(true).build();
@@ -63,7 +62,7 @@ public class PersonRest implements Serializable {
         TypeToken<PersonLoginDto> typeToken = new TypeToken<PersonLoginDto>() {
         };
         PersonLoginDto personLoginDto = JsonUtil.fromJson(jsonBody, typeToken);
-        PersonEntity personEntity = PersonEntity.build(personLoginDto.getLastname(), personLoginDto.getAge(), b);
+        PersonEntity personEntity = PersonEntity.build(personLoginDto.getFullName(), personLoginDto.getAge(), b);
         return LoginEntity.build(personLoginDto.getLogin(), personLoginDto.getPassword(), personEntity);
     }
 

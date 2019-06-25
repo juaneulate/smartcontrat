@@ -18,13 +18,13 @@ public class TestDto {
     private String stringVar;
     private List<DetailTestDto> detail;
 
-    public TestDto generateNewDto(int intVar, long longVar, String stringVar) {
-        return TestDto.builder().
-                intVar(intVar).
-                longVar(longVar).
-                stringVar(stringVar).
-                detail(new ArrayList<DetailTestDto>(0))
-                .build();
-    }
+//    public TestDto generateNewDto(int intVar, long longVar, String stringVar) {
+//        return TestDto.builder().
+//                intVar(intVar).
+//                longVar(longVar).
+//                stringVar(stringVar).
+//                detail(new ArrayList<DetailTestDto>(0))
+//                .build();
+//    }
 
 }
