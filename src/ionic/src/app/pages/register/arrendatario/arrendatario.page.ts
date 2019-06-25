@@ -27,7 +27,7 @@ export class ArrendatarioPage implements OnInit {
         private router: Router
     ) {
         this.formOptions = this.formBuilder.group({
-            lastname: new FormControl('', {validators: Validators.required}),
+            fullName: new FormControl('', {validators: Validators.required}),
             age: new FormControl('', {validators: Validators.required}),
             username: new FormControl('', {validators: Validators.required}),
             password: new FormControl('', {validators: Validators.required}),
@@ -53,12 +53,12 @@ export class ArrendatarioPage implements OnInit {
         this.submitted = true;
         this.loading = true;
 
-        const lastname = this.f.lastname.value;
+        const fullName = this.f.fullName.value;
         const age = this.f.age.value;
         const username = this.f.username.value;
         const password = this.f.password.value;
 
-        this.arrendatarioService.save(lastname, age, username, password)
+        this.arrendatarioService.save(fullName, age, username, password)
             .then(data => {
                 this.isOk = data.data;
                 if (this.isOk) {

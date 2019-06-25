@@ -16,7 +16,7 @@ export class RegisterSmartContractService {
   constructor(
     private platform: Platform
   ) {
-    this.urlProvider = 'http://192.168.0.111:8545';
+    this.urlProvider = 'http://192.168.0.5:8545';
     this.create();
   }
 
@@ -24,7 +24,7 @@ export class RegisterSmartContractService {
 
   }
 
-  register(billetera: string, jsonContract: string, hashContract: string) {
+  register(billetera: string, jsonContract: string, hashContract: string, name: string, age: number, personType: boolean) {
     this.platform.ready().then(dataP => {
 
       //const web3 = new Web3(this.urlProvider, null, options);
@@ -113,7 +113,7 @@ export class RegisterSmartContractService {
 
       const edad = 28;
       console.log(edad);
-      this.contract.setInstructor('yoyo', edad, false);
+      this.contract.setInstructor(name, age, personType);
       console.log(this.hashContract);
 
     });

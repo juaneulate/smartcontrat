@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {HTTP} from '@ionic-native/http/ngx';
-import {BaseService} from '../base/base.service';
+import { Injectable } from '@angular/core';
+import { HTTP } from '@ionic-native/http/ngx';
+import { BaseService } from '../base/base.service';
 
 @Injectable({
     providedIn: 'root'
@@ -14,18 +14,19 @@ export class ArrendatarioService extends BaseService {
         this.controllerUrl = 'person/';
     }
 
-    save(lastName: string, age: number, username: string, password: string) {
+    save(fullName: string, age: number, login: string, password: string) {
         const headers = {
-            ContentType: 'application/json'
+            'Content-Type': 'application/json'
         };
 
         const body = {
-            lastName,
+            fullName,
             age,
-            username,
+            login,
             password
         };
 
-        return this.http.post(this.getFullUrl() + 'tenant-save', body, {headers});
+        this.http.setDataSerializer('json');
+        return this.http.post(this.getFullUrl() + 'tenant-save', body, headers);
     }
 }

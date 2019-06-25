@@ -8,5 +8,59 @@
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="createForm" (ngSubmit)="saveContract()">
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size="10" offset="1">
+                <ion-input class="input-app" formControlName="registroBilletera" placeholder="registroBilletera"></ion-input>
+                <div *ngIf="submitted && f.registroBilletera.errors" class="invalid-feedback">
+                    <div *ngIf="f.registroBilletera.errors.required">La billetera is required</div>
+                </div>
+            </ion-col>
+        </ion-row>
 
+        <ion-row>
+            <ion-col size="10" offset="1">
+                <ion-input class="input-app" formControlName="montoTotal" placeholder="montoTotal"></ion-input>
+                <div *ngIf="submitted && f.montoTotal.errors" class="invalid-feedback">
+                    <div *ngIf="f.montoTotal.errors.required">Monto total is required</div>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="10" offset="1">
+                <ion-input class="input-app" formControlName="cuota" placeholder="cuota"></ion-input>
+                <div *ngIf="submitted && f.cuota.errors" class="invalid-feedback">
+                    <div *ngIf="f.cuota.errors.required">La cuota is required</div>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="10" offset="1">
+                <ion-input class="input-app" formControlName="nombreContrato" placeholder="nombreContrato"></ion-input>
+                <div *ngIf="submitted && f.nombreContrato.errors" class="invalid-feedback">
+                    <div *ngIf="f.nombreContrato.errors.required">El nombre del contrato is required</div>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="10" offset="1">
+                <ion-input class="input-app" formControlName="hashContrato" placeholder="hashContrato"></ion-input>
+                <div *ngIf="submitted && f.hashContrato.errors" class="invalid-feedback">
+                    <div *ngIf="f.hashContrato.errors.required">SmartContract Key is required</div>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="10" offset="1">
+                <ion-button [disabled]="loading" type="submit" expand="block" color="dark">Save</ion-button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+  </form>
 </ion-content>

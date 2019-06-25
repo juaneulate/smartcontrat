@@ -18,19 +18,25 @@
         </ion-row>
         <ion-row>
           <ion-col size="10" offset="1">
-            <p>Nombre: </p>
+            <p>Nombre: {{contract.nombreContrato}}</p>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="10" offset="1">
-            <p>Cuota: </p>
+            <p>Cuota: {{contract.cuota}}</p>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="10" offset="1">
-            <p>Monto: </p>
+            <p>Monto: {{contract.montoTotal}} </p>
           </ion-col>
         </ion-row>
+        <ion-row>
+          <ion-col size="10" offset="1">
+            <p>Billetera Owner: {{contract.regBilletera}} </p>
+          </ion-col>
+        </ion-row>
+
         <ion-row>
           <ion-col size="10" offset="1">
             <ion-input type="text" formControlName="billetera" placeholder="Number billetera" class="input-app">
@@ -40,6 +46,36 @@
             </div>
           </ion-col>
         </ion-row>
+
+        <ion-row>
+          <ion-col size="10" offset="1">
+            <ion-input type="text" formControlName="fullName" placeholder="Fullname" class="input-app">
+            </ion-input>
+            <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+              <div *ngIf="f.fullName.errors.required">Fullname is required</div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="10" offset="1">
+            <ion-input type="number" formControlName="age" placeholder="Age" class="input-app">
+            </ion-input>
+            <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+              <div *ngIf="f.age.errors.required">Age is required</div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="10" offset="1">
+            <ion-select formControlName="personType">
+              <ion-select-option value="true">Owner</ion-select-option>
+              <ion-select-option value="false">Tennant</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
         <ion-row>
           <ion-col size="10" offset="1">
             <ion-button [disabled]="loading" color="dark" expand="block" type="submit">Aceptar</ion-button>
